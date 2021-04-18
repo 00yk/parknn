@@ -1,0 +1,5 @@
+* v0 84secs (debug build)
+* v0.5 with k=7 16secs (reading data used 3 secs, on server 24secs)
+* v1 with pdqselect k=7 7secs(on server 14 secs)
+* v2 with rayon par_iter k=7 4secs(on server 6 secs)
+* v3 with par_lines read_csv 2secs(on server 0.5 sec)

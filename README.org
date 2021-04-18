@@ -1,0 +1,32 @@
+#+TITLE: Readme
+
+* How to run?
+To build the binary:
+#+begin_src shell
+cargo build --release
+#+end_src
+To run the binary:
+#+begin_src shell
+cd src && cargo run --release
+#+end_src
+You should change your location to src/ because I hard-coded the file name.
+Also, the predicted label for each test samples is output to the console
+
+* How to time it?
+You should first build the binary, and then:
+#+begin_src
+cd src && time cargo run --release
+#+end_src
+
+* Summary
+Debug build is much much slower than release build. Don't use debug build!
+In v0, I implemented kNN with k=1, then use built-in sort for each test sample when k=7, it runs for about 24 seconds.
+In v1, I first considered using space partitioning tree, however, space paritioning tree will enforce several constraints on the distance function, so I choose a simpler method because I want the program to be simple. I choose to use a thiry-party crate that implements pattern defeating quick select algorithm, this is the go-to method when you just want to get k-largest item in a sequence but don't want to sort it. The run time shrinks to around 14 seconds
+In v2, I add parallel processing to classification of each independent test samples, the program used about 6 seconds.
+In v3, I noticed that the classification used less than 1 second in v2, but it's the file parsing that takes the most time, so I used the same trick in v2 to parallelize the parsing function, and the final program takes about 0.5 second to run.
+
+* History version
+- v0.rs
+- v1.rs
+- v2.rs
+- v3.rs(main.rs)
